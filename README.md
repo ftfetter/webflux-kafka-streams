@@ -5,16 +5,13 @@ to consume/produce Kafka messages in a functional and reactive way with Reactor 
 
 ## How to run
 
-With Docker installed, go to the root folder of this project and run the `docker-compose` file.
+With Docker installed, go to the root folder of this project and run the `kafka-setup` script.
 
 ```
-$ docker compose up -d
+$ ./kafka-setup.sh
 ```
 
-> Here I used the _compose_ plugin for Docker, so if you have _docker-compose_ itself installed, you 
-> may need to use `docker-compose` command instead. 
-
-This will up a Kafka broker for the tests in `localhost:9092` with two topics:
+This will up a Zookeeper instance and a Kafka broker for the tests in `localhost:9092` with two topics:
 **quickstart** and **quickstart-response**.
 
 Then, you can run the application in your IDE (_for now_) and start posting messages.
