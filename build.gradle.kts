@@ -28,6 +28,7 @@ dependencies {
 	implementation("org.springframework.cloud:spring-cloud-stream")
 	implementation("org.springframework.cloud:spring-cloud-stream-binder-kafka")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.kafka:spring-kafka-test")
 	testImplementation("io.projectreactor:reactor-test")
 }
 
