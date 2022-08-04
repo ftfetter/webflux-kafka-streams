@@ -7,7 +7,7 @@ to consume/produce Kafka messages in a functional and reactive way with Reactor 
 
 With Docker installed, go to the root folder of this project and run the `kafka-setup` script.
 
-```
+```shell
 $ ./kafka-setup.sh
 ```
 
@@ -16,29 +16,45 @@ This will up a Zookeeper instance and a Kafka broker for the tests in `localhost
 
 Then, you can run the application in your IDE (_for now_) and start posting messages.
 
-## How to post messages
-
-I recommend you to keep two terminals open: one for producing messages on the **quickstart** topic,
-and the other one to watch the output consuming the messages from **quickstart-response**.
+## How to consume messages
 
 To consume the output messages, run:
 
-```
+```shell
 $ docker exec --interactive --tty broker \
   kafka-console-consumer --bootstrap-server broker:9092 \
                          --topic quickstart-response \
                          --from-beginning
 ```
 
-And to start producing messages, run the following command:
+## How to post messages
 
-```
+### Directly into Kafka broker
+
+To produce messages directly, run:
+
+```shell
 $ docker exec --interactive --tty broker \
   kafka-console-producer --bootstrap-server broker:9092 \
                          --topic quickstart
 ```
 
 It will keep the producer running, and everything you write will be sent as a Kafka message.
+
+### Via REST API
+
+Another way to produce messages is by REST API. You can run the following command: 
+
+```shell
+$ curl --location --request POST 'localhost:8080/post' \
+  --header 'Content-Type: text/plain' \
+  --data-raw 'hello world!'
+```
+
+This will post a message just like the body sent.
+In this case, will post `hello world!` into **quickstart-response**.
+
+Note that this message is not converted to uppercase. It's posted as received.
 
 ## How the project works
 
@@ -50,7 +66,7 @@ It's quite simple for now, but it's just to play with those concepts (it will ge
 
 - Create a Dockerfile for the application, so it will be running with `docker compose` command.
 - Add more examples of producing and consuming messages from Kafka:
-  - Producing messages from another source
+  - ~~Producing messages from another source~~
   - Just consume messages
   - Object messages
   - Header conditions
